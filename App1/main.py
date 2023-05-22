@@ -1,9 +1,22 @@
-user_prompt = "Enter a todo:"
-todo1 = input(user_prompt)
-todo2 = input(user_prompt)
-todo3 = input(user_prompt)
+todos = []
 
-todos = [todo1, todo2, todo3]
+while True:
+    action = input("Type add[a], show[s], edit[e] or exit[x]:")
 
-print(todos)
-print(type(user_prompt))
+    match action:
+        case 'add' | 'a':
+            todo = input("Enter a todo: ")
+            todos.append(todo)
+        case 'show' | 's':
+            for item in todos:
+                print(item)
+        case 'edit' | 'e':
+            number = int(input("Option: "))
+            new = input("New value: ")
+            todos[number-1] = new
+        case 'exit' | 'x':
+            break
+
+print("Bye")
+
+
