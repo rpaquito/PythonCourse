@@ -1,9 +1,15 @@
-def get_todos():
-    with open('files/todos.txt', 'r') as file_local:
+def get_todos(filepath):
+    with open(filepath, 'r') as file_local:
         todos_local = file_local.readlines()
     return todos_local
 
 
+def write_todos(filepath, todolist):
+    with open(filepath, 'w') as file_local:
+        file_local.writelines(todolist)
+
+
+global_file_path = 'files/todos.txt'
 while True:
     action = input("Type add, show, edit, complete or exit:")
     action = action.strip()
@@ -11,14 +17,13 @@ while True:
     if action.startswith('add'):
         todo = action[4:] + "\n"
 
-        todos = get_todos()
+        todos = get_todos(global_file_path)
         todos.append(todo)
 
-        with open('files/todos.txt', 'w') as file:
-            file.writelines(todos)
+        write_todos(global_file_path, todos)
 
     elif action.startswith('show'):
-        todos = get_todos()
+        todos = get_todos(global_file_path)
 
         # list comprehensions example
         # new_todos =[item.strip("\n") for item in todos]
@@ -30,27 +35,26 @@ while True:
     elif action.startswith('edit'):
         try:
             number = int(action[5:])
-            todos = get_todos()
+            todos = get_todos(global_file_path)
 
             new = input("New value: ")
             todos[number - 1] = new + "\n"
 
-            with open('files/todos.txt', 'w') as file:
-                file.writelines(todos)
+            write_todos(global_file_path, todos)
+
         except ValueError:
             print("Your command is not valid")
             continue
 
     elif action.startswith('complete'):
         try:
-            todos = get_todos()
+            todos = get_todos(global_file_path)
 
             number = int(action[9:])
             todo_to_remove = todos[number - 1].strip("\n")
             todos.pop(number - 1)
 
-            with open('files/todos.txt', 'w') as file:
-                file.writelines(todos)
+            write_todos(global_file_path, todos)
 
             message = f"Todo {todo_to_remove} was removed from the list."
             print(message)
