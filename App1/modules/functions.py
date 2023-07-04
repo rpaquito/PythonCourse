@@ -18,6 +18,7 @@ def write_todos(todolist, filepath=FILEPATH):
         file_local.writelines(todolist)
 
 
+# Just executes if we run this file
 if __name__ == "__main__":
     print(__name__)
     print("Functions imported")
