@@ -10,5 +10,11 @@ def make_archive(filepaths, dest_dir):
             archive.write(filepath, arcname=filepath.name)
 
 
+def extract_archive(filepath, dest_dir):
+    with zipfile.ZipFile(filepath, 'r') as archive:
+        archive.extractall(dest_dir)
+
+
 if __name__ == "__main__":
     make_archive(filepaths=["zip_creator.py"], dest_dir="dest")
+    extract_archive(filepath=["dest\compressed.zip"], dest_dir="dest")
