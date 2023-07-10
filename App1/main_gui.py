@@ -20,13 +20,13 @@ edit_button = Sg.Button("Edit")
 complete_button = Sg.Button("Complete")
 exit_button = Sg.Button("Exit")
 
+
+col1 = Sg.Column([[label], [clock], [input_box, add_button], [list_box], [exit_button]])
+col2 = Sg.Column([[edit_button]])
+col3 = Sg.Column([[complete_button]])
+
 window = Sg.Window('My ToDo App',
-                   layout=[
-                       [label],
-                       [clock],
-                       [input_box, add_button],
-                       [list_box, edit_button, complete_button],
-                       [exit_button]],
+                   layout=[[col1, col2, col3]],
                    font=('Helvetica', 18))
 
 while True:
